@@ -15,5 +15,7 @@ declare namespace Cypress {
         ListagemUsuarioPorEmailComSucesso(): Chainable<Element>;
         ListagemUsuarioPorNomeComSucesso(): Chainable<Element>;
         OptionRelatorios(): Chainable<Element>;
+        CadastrarUsuarioExistente():Chainable<Element>;
+        CadastrarUsuarioNovo():Chainable<Element>;
     }
 }

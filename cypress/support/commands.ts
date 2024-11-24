@@ -1,4 +1,6 @@
 
+import { faker } from '@faker-js/faker';
+
 Cypress.Commands.add('VisitaPaginaServerest', () => {
     cy.visit('https://front.serverest.dev/login')
 });
@@ -58,4 +60,23 @@ Cypress.Commands.add('OptionRelatorios',()=>{
     cy.contains('Em construção aguarde').should('be.visible')
 })
 
+Cypress.Commands.add('CadastrarUsuarioExistente',()=>{
+    cy.get('[data-testid="cadastrar-usuarios"]').click()
+    cy.get('[data-testid="nome"]').type('Testando Cadastro Cypress')
+    cy.get('[data-testid="email"]').type('testecypresscadastro@continue.com')
+    cy.get('[data-testid="password"]').type('senhatestebuscandosenha')
+    cy.get('[data-testid="checkbox"]').check()
+    cy.get('[data-testid="cadastrarUsuario"]').click()
+    cy.contains('Este email já está sendo usado').should('be.visible')
+})
+Cypress.Commands.add('CadastrarUsuarioNovo',()=>{
+    const emailFalso = faker.internet.email();
 
+    cy.get('[data-testid="cadastrar-usuarios"]').click()
+    cy.get('[data-testid="nome"]').type('Testando Cadastro Cypress')
+    cy.get('[data-testid="email"]').type(emailFalso)
+    cy.get('[data-testid="password"]').type('senhatestebuscandosenha')
+    cy.get('[data-testid="checkbox"]').check()
+    cy.get('[data-testid="cadastrarUsuario"]').click()
+    cy.contains(emailFalso).should('be.visible')
+})
